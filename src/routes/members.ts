@@ -3,6 +3,26 @@ import { Router, Request, Response } from 'express';
 import { getMembers, getMemberById, createMember, updateMember,deleteMemberIds } from '../services/supabaseService';
 
 const router = Router();
+router.get('/members', async (req: Request, res: Response) => {
+  try {
+    const { page = 1, limit = 10, sortBy = 'id', order = 'asc', search = '' } = req.query;
+
+    const pagination = {
+      page: parseInt(page as string),
+      limit: parseInt(limit as string)
+    };
+
+    const sort = {
+      sortBy: sortBy as string,
+      order: (order as string).toLowerCase() === 'desc' ? 'desc' : 'asc' as 'asc' | 'desc'
+    };
+
+    const members = await getMembers(pagination, sort, search as string);
+    res.status(200).json(members);
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 router.get('/members', async (req: Request, res: Response) => {
   try {
@@ -37,15 +57,7 @@ router.get('/members/:id', async (req: Request, res: Response) => {
   }
 });
 
-router.post('/members', async (req: Request, res: Response) => {
-  try {
-    const member = req.body;
-    const newMember = await createMember(member);
-    res.status(201).json(newMember);
-  } catch (error: any) {
-    res.status(500).json({ error: error.message });
-  }
-});
+
 
 router.put('/members/:id', async (req: Request, res: Response) => {
   try {

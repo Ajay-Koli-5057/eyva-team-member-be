@@ -28,18 +28,19 @@ export async function getMembers(pagination: Pagination, sort: Sort, search: str
   if (search) {
     query = query.or(`name.ilike.%${search}%,userName.ilike.%${search}%,role.ilike.%${search}%,email.ilike.%${search}%`);
   }
-
+ 
   const { data, error } = await query
     .order(sortBy, { ascending: order === 'asc' })
     .range((page - 1) * limit, page * limit - 1);
 
+    
   if (error) {
     throw new Error(`Error fetching members: ${error.message}`);
   }
-
+  
   const { count } = await supabase.from('team_members').select('*', { count: 'exact' });
-
-  return { items: data, count };
+  
+   return { items: data,count };
 }
 
 export async function getMemberById(id: number) {
@@ -64,7 +65,7 @@ export async function createMember(member: Member) {
 }
 
 export async function updateMember(id: number, member: Partial<Member>) {
-    const { data, error, status } = await supabase
+    const { data, error } = await supabase
     .from('team_members')
     .update(member)
     .eq('id', id)
