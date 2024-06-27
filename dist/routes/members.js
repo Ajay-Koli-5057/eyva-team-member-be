@@ -33,7 +33,6 @@ router.get('/members', (req, res) => __awaiter(void 0, void 0, void 0, function*
 router.get('/members/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
-     
         const member = yield (0, supabaseService_1.getMemberById)(parseInt(id));
         res.status(200).json(member);
     }
@@ -64,7 +63,6 @@ router.put('/members/:id', (req, res) => __awaiter(void 0, void 0, void 0, funct
 }));
 router.delete('/members', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-
         let ids = req.body.ids;
         if (!Array.isArray(ids)) {
             return res.status(400).json({ error: 'IDs must be provided as a valid array' });

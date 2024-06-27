@@ -29,7 +29,6 @@ function importDummyData(filePath) {
             if (error) {
                 throw new Error(`Error importing dummy data: ${error.message}`);
             }
-          
             return data;
         }
         catch (error) {
