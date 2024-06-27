@@ -1,8 +1,8 @@
 
 import express from 'express';
 import dotenv from 'dotenv';
-import memberRoutes from './routes/members';
-import errorHandler from './utils/errorHandler';
+import memberRoutes from './src/routes/members';
+import errorHandler from './src/utils/errorHandler';
 import cors from 'cors';
 
 dotenv.config();
