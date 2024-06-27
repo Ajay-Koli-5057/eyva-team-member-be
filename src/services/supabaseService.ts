@@ -54,15 +54,6 @@ export async function getMemberById(id: number) {
   return data;
 }
 
-export async function createMember(member: Member) {
-  const { data, error } = await supabase.from('team_members').insert([member]).single();
-
-  if (error) {
-    throw new Error(`Error creating member: ${error.message}`);
-  }
-
-  return data;
-}
 
 export async function updateMember(id: number, member: Partial<Member>) {
     const { data, error } = await supabase

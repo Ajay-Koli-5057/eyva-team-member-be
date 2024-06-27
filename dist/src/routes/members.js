@@ -12,24 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const supabaseService_1 = require("../services/supabaseService");
 const router = (0, express_1.Router)();
-router.get('/members', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const { page = 1, limit = 10, sortBy = 'id', order = 'asc', search = '' } = req.query;
-        const pagination = {
-            page: parseInt(page),
-            limit: parseInt(limit)
-        };
-        const sort = {
-            sortBy: sortBy,
-            order: order.toLowerCase() === 'desc' ? 'desc' : 'asc'
-        };
-        const members = yield (0, supabaseService_1.getMembers)(pagination, sort, search);
-        res.status(200).json(members);
-    }
-    catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-}));
+// 
 router.get('/members', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { page = 1, limit = 10, sortBy = 'id', order = 'asc', search = '' } = req.query;

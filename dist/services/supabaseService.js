@@ -51,15 +51,7 @@ function getMemberById(id) {
         return data;
     });
 }
-function createMember(member) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const { data, error } = yield exports.supabase.from('team_members').insert([member]).single();
-        if (error) {
-            throw new Error(`Error creating member: ${error.message}`);
-        }
-        return data;
-    });
-}
+
 function updateMember(id, member) {
     return __awaiter(this, void 0, void 0, function* () {
         const { data, error, status } = yield exports.supabase

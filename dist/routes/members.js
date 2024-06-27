@@ -40,16 +40,7 @@ router.get('/members/:id', (req, res) => __awaiter(void 0, void 0, void 0, funct
         res.status(500).json({ error: error.message });
     }
 }));
-router.post('/members', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const member = req.body;
-        const newMember = yield (0, supabaseService_1.createMember)(member);
-        res.status(201).json(newMember);
-    }
-    catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-}));
+
 router.put('/members/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;

@@ -15,7 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.supabase = void 0;
 exports.getMembers = getMembers;
 exports.getMemberById = getMemberById;
-exports.createMember = createMember;
 exports.updateMember = updateMember;
 exports.deleteMemberIds = deleteMemberIds;
 const supabase_js_1 = require("@supabase/supabase-js");
@@ -39,9 +38,6 @@ function getMembers(pagination, sort, search) {
             throw new Error(`Error fetching members: ${error.message}`);
         }
         const { count } = yield exports.supabase.from('team_members').select('*', { count: 'exact' });
-        const datad = yield exports.supabase.from('team_members').select('data', { count: 'exact' });
-        
-       
         return { items: data, count };
     });
 }
@@ -50,15 +46,6 @@ function getMemberById(id) {
         const { data, error } = yield exports.supabase.from('team_members').select('*').eq('id', id).single();
         if (error) {
             throw new Error(`Error fetching member by id ${id}: ${error.message}`);
-        }
-        return data;
-    });
-}
-function createMember(member) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const { data, error } = yield exports.supabase.from('team_members').insert([member]).single();
-        if (error) {
-            throw new Error(`Error creating member: ${error.message}`);
         }
         return data;
     });
